@@ -8,9 +8,10 @@
 
 ## 如何使用
 
-1. 编译项目
+### 1. 编译项目
 
-2. 如果是Spring Boot用户,可以通过`@EnableSentinel`注解开启包功能.注解生效时会自动注入Sentinel的`SentinelResourceAspect`类,所以**不需要**额外再配置.
+### 2. SpringBoot配置
+如果是Spring Boot用户,可以通过`@EnableSentinel`注解开启包功能.注解生效时会自动注入Sentinel的`SentinelResourceAspect`类,所以**不需要**额外再配置.
 例:
 ```java
 @EnableSentinel
@@ -23,13 +24,15 @@ public class Starter extends SpringBootServletInitializer {
 }
 ```
 
-3. 如果是基于xml的spring配置,需要配置如下这个两个bean.
+### 3. Spring的xml配置
+如果是基于xml的spring配置,需要配置如下这个两个bean.
 ```xml
 <bean class="com.alibaba.csp.sentinel.annotation.aspectj.SentinelResourceAspect"></bean>
 <bean class="com.ximalaya.business.Annotation.configuration.SentinelAnnotationBeanProcessor"></bean>
 ```
 
-4. sentinel-lib库提供了多种流控配置注解和降级控制注解,如下
+### 4. 可用的注解类简介 
+sentinel-lib库提供了多种流控配置注解和降级控制注解,如下
 
 | 注解类 | 功能 |
 | -------- | ------- |
@@ -38,7 +41,7 @@ public class Starter extends SpringBootServletInitializer {
 |WarmUpFlowRuleDefine |预热和预热限速流控|
 |DegradeRuleDefine |降级控制|
 
-5. 使用例子
+### 5. 使用例子
 ```java
 @RestController
 @RequestMapping("sample")
@@ -72,7 +75,8 @@ public class MyFlowSampleController {
 }
 ```
 
-6. 注解中的配置可以支持properties文件.例如application.properties包含如下内容
+### 6. 使用properties
+注解中的配置可以支持properties文件.例如application.properties包含如下内容
 ```ini
 my.flow=123
 my.degrade.count=500
@@ -91,6 +95,6 @@ public Response doSomething() {
 }
 ```
 
-7. 关于灵活性
+### 7. 关于灵活性
 在注解中使用properties文件属性,可以支持在dev,test,prd环境使用不同的限流数量配置.
 如果需要更加灵活的在线实时修改配置能力,建议使用ASAH的Sentinel控制台来做.

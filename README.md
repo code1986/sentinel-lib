@@ -1,15 +1,15 @@
 # sentinel-lib 基于注解的流控和降级配置库
 ## 目标背景
 
-简化FlowRule和DegradeRule的配置,目前的配置方式是在需要降级的地方写上SentinelResource注解,
-然后专门找个文件写FlowRule和DegradeRule,配置内容分散,resource名需要在多处拷贝,需要多加小心保持各处resource名的一致性,给代码维护增加负担.
-使用注解定义FlowRule和DegradeRule后,资源名只需要出现一次, 限流和降级规则在定义SentinelResource处直接可见,降低配置分散度,维护起来比较轻松.
+Sentinel的限流降级配置需要手动编码实现,编码地方往往和使用SentinelResource注解的代码不在同一个文件,配置分散不方便管理.
+ResourceName需要在SentinelResource中,降级的地方,限流的地方多处重复定义,可能会出现手误导致出错,
+为解决这些问题,sentinel-lib提供了一些注解,可以直接在使用SentinelResource注解的地方直接配置熔断限流规则.
 
 ## 如何使用
 
 1. 编译项目
 
-2. 如果是Spring Boot用户,可以通过EnableSentinel注解开启包功能.注解生效时会自动注入Sentinel的SentinelResourceAspect类,所以不需要额外再配置.
+2. 如果是Spring Boot用户,可以通过`@EnableSentinel`注解开启包功能.注解生效时会自动注入Sentinel的`SentinelResourceAspect`类,所以**不需要额外再配置.
 例:
 ```java
 @EnableSentinel
@@ -22,7 +22,7 @@ public class Starter extends SpringBootServletInitializer {
 }
 ```
 
-如果是基于xml的spring配置,需要配置如下这个bean.同时SentinelResourceAspect也需要额外配置.
+如果是基于xml的spring配置,需要配置如下这个bean.同时`SentinelResourceAspect`也**必须**要额外配置.
 ```xml
 <bean class="com.alibaba.csp.sentinel.annotation.aspectj.SentinelResourceAspect"></bean>
 <bean class="com.ximalaya.business.Annotation.configuration.SentinelAnnotationBeanProcessor"></bean>
@@ -77,12 +77,12 @@ my.degrade.tw = 21
 
 则在注解中可以使用定义的变量,如下:
 ```java
-    @WarmUpFlowRuleDefine(rateLimit = "30")
-    @FlowRuleDefine(count = "#{getProperty('my.flow')}")
-    @DegradeRuleDefine(count = "${my.degrade.count}", timeWindow = "${my.degrade.tw}")
-    @SentinelResource(value="doSomething", blockHandler = "myBlockHandler", fallback = "myDegradeHandler")
-    @RequestMapping("/doSomething")
-    public Response doSomething() {
-        return new Response("everything is ok");
-    }
+@WarmUpFlowRuleDefine(rateLimit = "30")
+@FlowRuleDefine(count = "${my.flow}")
+@DegradeRuleDefine(count = "${my.degrade.count}", timeWindow = "${my.degrade.tw}")
+@SentinelResource(value="doSomething", blockHandler = "myBlockHandler", fallback = "myDegradeHandler")
+@RequestMapping("/doSomething")
+public Response doSomething() {
+    return new Response("everything is ok");
+}
 ```

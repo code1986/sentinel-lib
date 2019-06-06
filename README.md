@@ -10,7 +10,7 @@
 
 1. 编译项目
 
-2. 如果是Spring Boot用户,可以通过`@EnableSentinel`注解开启包功能.注解生效时会自动注入Sentinel的`SentinelResourceAspect`类,所以**不需要额外再配置.
+2. 如果是Spring Boot用户,可以通过`@EnableSentinel`注解开启包功能.注解生效时会自动注入Sentinel的`SentinelResourceAspect`类,所以**不需要**额外再配置.
 例:
 ```java
 @EnableSentinel

@@ -1,8 +1,9 @@
 # sentinel-lib 基于注解的流控和降级配置库
 ## 目标背景
 
-Sentinel的限流降级配置需要手动编码实现,定义限流熔断规则的地方往往和使用SentinelResource注解的代码不在同一个文件,配置分散不方便管理.
-ResourceName需要在SentinelResource中,降级的地方,限流的地方多处重复定义,可能会出现手误导致出错,
+- Sentinel的限流降级配置需要手动编码实现,定义限流熔断规则的地方往往和使用SentinelResource注解的代码不在同一个文件,配置分散不方便管理.
+- ResourceName需要在SentinelResource中,降级的地方,限流的地方多处重复定义,可能会出现手误导致出错,
+
 为解决这些问题,sentinel-lib提供了一些注解,可以直接在使用SentinelResource注解的地方直接配置熔断限流规则.
 
 ## 如何使用

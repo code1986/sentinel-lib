@@ -23,19 +23,19 @@ public class Starter extends SpringBootServletInitializer {
 }
 ```
 
-如果是基于xml的spring配置,需要配置如下这个bean.同时`SentinelResourceAspect`也**必须**要额外配置.
+3. 如果是基于xml的spring配置,需要配置如下这个两个bean.
 ```xml
 <bean class="com.alibaba.csp.sentinel.annotation.aspectj.SentinelResourceAspect"></bean>
 <bean class="com.ximalaya.business.Annotation.configuration.SentinelAnnotationBeanProcessor"></bean>
 ```
 
-3. sentinel-lib库提供了多种流控配置注解和降级控制注解,如下
+4. sentinel-lib库提供了多种流控配置注解和降级控制注解,如下
 * FlowRuleDefine 默认直接拒绝行为的流控
 * RateLimitFlowRuleDefine 限速流控
 * WarmUpFlowRuleDefine 预热和预热限速流控
 * DegradeRuleDefine 降级控制
 
-4. 使用例子
+5. 使用例子
 ```java
 @RestController
 @RequestMapping("sample")
@@ -69,7 +69,7 @@ public class MyFlowSampleController {
 }
 ```
 
-4. 注解中的配置可以支持properties文件.例如application.properties包含如下内容
+6. 注解中的配置可以支持properties文件.例如application.properties包含如下内容
 ```ini
 my.flow=123
 my.degrade.count=500

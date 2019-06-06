@@ -97,4 +97,5 @@ public Response doSomething() {
 
 ### 7. 关于灵活性
 在注解中使用properties文件属性,可以支持在dev,test,prd环境使用不同的限流数量配置.
+
 如果需要更加灵活的在线实时修改配置能力,建议使用ASAH的Sentinel控制台来做.

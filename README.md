@@ -30,8 +30,9 @@ public class Starter extends SpringBootServletInitializer {
 ```
 
 4. sentinel-lib库提供了多种流控配置注解和降级控制注解,如下
-|注解类|功能|
-|:-:|:-:|
+
+| 注解类 | 功能 |
+| -------- | ------- |
 |FlowRuleDefine |默认直接拒绝行为的流控|
 |RateLimitFlowRuleDefine| 限速流控|
 |WarmUpFlowRuleDefine |预热和预热限速流控|

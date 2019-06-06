@@ -1,5 +1,5 @@
 # sentinel-lib 使用注解配置配置熔断限流规则
-## 目标背景
+## 背景和目的
 
 - Sentinel的限流降级配置需要手动编码实现,定义限流熔断规则的地方往往和使用SentinelResource注解的代码不在同一个文件,配置分散不方便管理.
 - ResourceName需要在SentinelResource中,降级的地方,限流的地方多处重复定义,可能会出现手误导致出错,
